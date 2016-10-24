@@ -72,6 +72,22 @@ router.patch("/projects/:id") {
     response.status(.OK).send(json: json)
 }
 
+router.delete("/projects/:id") {
+    request, response, next in
+    defer { next() }
+    guard
+        let id = request.parameters["id"],
+        let project = fetch(by: id, in: projects)
+        else {
+            response.status(.badRequest)
+            return
+    }
+    
+    projects = remove(project, in: projects)
+    
+    response.status(.OK).send("")
+}
+
 router.get("/projects/:project_id/tasks/:task_id") {
     request, response, next in
     defer { next() }
@@ -140,6 +156,24 @@ router.patch("/projects/:project_id/tasks/:task_id") {
     
     let json = JSON(toDictionary(from: updatedTask))
     response.status(.OK).send(json: json)
+}
+
+router.delete("/projects/:project_id/tasks/:task_id") {
+    request, response, next in
+    defer { next() }
+    guard
+        let id = request.parameters["project_id"],
+        let project = fetch(by: id, in: projects),
+        let taskID = request.parameters["task_id"],
+        let task = fetch(by: taskID, in: project.tasks)
+        else {
+            response.status(.badRequest)
+            return
+    }
+    
+    projects = replace(in: projects) • updateTasks(of: project) <| remove(task, in: project.tasks)
+    
+    response.status(.OK).send("")
 }
 
 Kitura.addHTTPServer(onPort: 8090, with: router)
