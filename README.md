@@ -186,17 +186,11 @@ POST http://localhost:8090/projects/6/tasks?title=task&deadline=16284&completed=
 
 ```JSON
 {
-  "id" : "6",
-  "name" : "HiNative",
-  "tasks" : [
-    {
-      "title" : "task",
-      "deadline" : 16284,
-      "id" : "2",
-      "project_id" : "6",
-      "completed" : false
-    }
-  ]
+  "title" : "task",
+  "deadline" : 16284,
+  "id" : "2",
+  "project_id" : "6",
+  "completed" : false
 }
 ```
 
