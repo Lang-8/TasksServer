@@ -126,22 +126,21 @@ Delete a project
 
 - :id - UInt64, required
 
+#### Request & Response
+
+DELETE http://localhost:8090/projects/1
+
+Response is empty.
+
 ## Tasks
 
-### GET /projects/:project_id/tasks/:task_id
+### GET /projects/:project_id/tasks
 
 Get tasks of a project
 
 #### Parameters
 
 - :project_id - UInt64, required
-- :task_id - UInt64, required
-
-#### Request & Response
-
-DELETE http://localhost:8090/projects/1
-
-Response is empty.
 
 ### GET /projects/:project_id/tasks/:task_id
 
